@@ -1,0 +1,18 @@
+
+{
+    "name": "default",
+    "type": "mariadb",
+    "host": "arcin.solutions",
+    "port": 3306,
+    "username": "goldAdmin",
+    "password": "Ctdb5rff2FkkmtGS84gA",
+    "database": "goldV",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+      "./src/core/modules/db/entity/*.js"
+    ],
+    "cli": {
+      "entitiesDir": "src/core/modules/db/entity"
+    }
+  }

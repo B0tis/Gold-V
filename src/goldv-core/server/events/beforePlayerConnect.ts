@@ -5,7 +5,7 @@ import { IsNewUser, newUser } from "../../modules/db/functions/user";
 import { goldvWebhookBannedPlayer } from "../../modules/webhook";
 
 on('beforePlayerConnect', (player: IConnectionInfo) => {
-    return DB.createQueryBuilder().select("user").from(User, "user").where("user.socialID = :socialID", {socialID: player.socialID}).getOne().then((thisUser) => {        
+    if (DB.createQueryBuilder().select("user").from(User, "user").where("user.socialID = :socialID", {socialID: player.socialID}).getOne().then((thisUser) => {
         if (thisUser != undefined || thisUser != null) {
             if (thisUser.banned)
                 return false;
@@ -15,5 +15,8 @@ on('beforePlayerConnect', (player: IConnectionInfo) => {
             newUser(player);
             return true;
         }
-    });
+    })) {
+        return true;
+    } else
+    return false;
 })

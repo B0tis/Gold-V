@@ -15,6 +15,6 @@ on("playerDisconnect", (player: Player, reason: string) => {
     const rot_z = player.rot.z;
 
     const user = DB.createQueryBuilder().select("user").from(User, "user").where("user.socialID = :socialID", {socialID: player.socialID}).getOne().then(thisUser => {
-        DB.createQueryBuilder().update(Char).update({pos_x: x, pos_y: y, pos_z: z, rot_x: rot_x, rot_y: rot_y, rot_z: rot_z}).where("user_id = :userID", {userID: thisUser.id}).execute();
+        DB.createQueryBuilder().update(Char).set({pos_x: x, pos_y: y, pos_z: z, rot_x: rot_x, rot_y: rot_y, rot_z: rot_z}).where("user_id = :userID", {userID: thisUser.id}).execute();
     });
 })
